@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/puppy-api/static/css/main.1d193b00.css",
+    "main.js": "/puppy-api/static/js/main.1fa4324d.js",
+    "static/js/787.c4e7f8f9.chunk.js": "/puppy-api/static/js/787.c4e7f8f9.chunk.js",
+    "index.html": "/puppy-api/index.html",
+    "main.1d193b00.css.map": "/puppy-api/static/css/main.1d193b00.css.map",
+    "main.1fa4324d.js.map": "/puppy-api/static/js/main.1fa4324d.js.map",
+    "787.c4e7f8f9.chunk.js.map": "/puppy-api/static/js/787.c4e7f8f9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1d193b00.css",
+    "static/js/main.1fa4324d.js"
+  ]
+}

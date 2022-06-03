@@ -24,6 +24,8 @@ const Todo: React.FC<Props> = ({ puppy, deletePuppy, updatePuppy }) => {
     setIsUpdate(true);
   };
 
+  // console.log('the puppy', puppy)
+
   return (
     <div className="Card">
       <div className="Card--text">

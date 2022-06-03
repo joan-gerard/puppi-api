@@ -3,9 +3,15 @@ import PuppyItem from "./components/PuppyItem";
 import AddPuppy from "./components/AddPuppy";
 import { getPuppies, addPuppy, deletePuppy, updatePuppy } from "./API";
 import "./App.scss";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "./store";
+import { getAllPuppies } from "./features/Puppies";
 
 const App = () => {
   const [puppies, setPuppies] = useState<IPuppy[]>([]);
+
+  const puppyList = useSelector((state: RootState) => state.puppies.value);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     fetchPuppies();
@@ -13,10 +19,14 @@ const App = () => {
 
   const fetchPuppies = (): void => {
     getPuppies()
-      .then(({ data: { puppies } }: IPuppy[] | any) => setPuppies(puppies))
+      // .then((data) => console.log("data", data.data.puppies))
+      .then(({ data: { puppies } }: IPuppy[] | any) => {
+        console.log("data", puppies);
+        dispatch(getAllPuppies(puppies));
+      })
+      // .then(({ data: { puppies } }: IPuppy[] | any) => setPuppies(puppies))
       .catch((err: Error) => console.log(err));
   };
-
 
   const handleSavePuppy = (e: React.FormEvent, formData: IPuppy): void => {
     e.preventDefault();
@@ -34,7 +44,6 @@ const App = () => {
   const handleDeletePuppy = (_id: string): void => {
     deletePuppy(_id)
       .then(({ status, data }) => {
-
         if (status !== 200) {
           throw new Error("Error! Puppy not deleted");
         }
@@ -55,14 +64,16 @@ const App = () => {
       .catch((err) => console.log(err));
   };
 
+  console.log("puppyList", puppyList);
+  console.log("puppies", puppies);
   return (
     <main className="App">
       <h1>My Puppies</h1>
       <AddPuppy savePuppy={handleSavePuppy} />
       <div className="puppy-cards">
-        {puppies.map((puppy: IPuppy) => (
+        {puppyList.map((puppy: IPuppy, idx) => (
           <PuppyItem
-            key={puppy._id}
+            key={idx}
             updatePuppy={handleUpdatePuppy}
             deletePuppy={handleDeletePuppy}
             puppy={puppy}

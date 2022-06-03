@@ -4,7 +4,7 @@ type Props = {
   savePuppy: (e: React.FormEvent, formData: IPuppy | any) => void;
 };
 
-const AddTodo: React.FC<Props> = ({ savePuppy }) => {
+const AddPuppy: React.FC<Props> = ({ savePuppy }) => {
   const [formData, setFormData] = useState<IPuppy | {}>();
 
   const handleForm = (e: React.FormEvent<HTMLInputElement>): void => {
@@ -38,4 +38,4 @@ const AddTodo: React.FC<Props> = ({ savePuppy }) => {
   );
 };
 
-export default AddTodo;
+export default AddPuppy;

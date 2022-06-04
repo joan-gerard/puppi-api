@@ -5,7 +5,7 @@ import { getPuppies, addPuppy, deletePuppy, updatePuppy } from "./API";
 import "./App.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "./store";
-import { getAllPuppies } from "./features/Puppies";
+import { getAllPuppies, deletePuppyReducer } from "./features/Puppies";
 
 const App = () => {
   const [puppies, setPuppies] = useState<IPuppy[]>([]);
@@ -17,7 +17,8 @@ const App = () => {
     fetchPuppies();
   }, []);
 
-  const fetchPuppies = (): void => {
+  
+  const fetchPuppies = (): any => {
     getPuppies()
       // .then((data) => console.log("data", data.data.puppies))
       .then(({ data: { puppies } }: IPuppy[] | any) => {
@@ -44,28 +45,40 @@ const App = () => {
   const handleDeletePuppy = (_id: string): void => {
     deletePuppy(_id)
       .then(({ status, data }) => {
+        console.log('handleDeletePuppy', data)
+        // debugger;
         if (status !== 200) {
           throw new Error("Error! Puppy not deleted");
         }
 
-        setPuppies(data.puppies);
+        dispatch(deletePuppyReducer(data.puppies));
       })
+      // .then(() => fetchPuppies())
       .catch((err) => console.log(err));
+    // deletePuppy(_id)
+    //   .then(({ status, data }) => {
+    //     if (status !== 200) {
+    //       throw new Error("Error! Puppy not deleted");
+    //     }
+
+    //     setPuppies(data.puppies);
+    //   })
+    //   .catch((err) => console.log(err));
   };
 
   const handleUpdatePuppy = (e: React.FormEvent, formData: IPuppy): void => {
-    updatePuppy(formData)
-      .then(({ status, data }) => {
-        if (status !== 200) {
-          throw new Error("Error! Puppy not updated");
-        }
-        setPuppies(data.puppies);
-      })
-      .catch((err) => console.log(err));
+    // updatePuppy(formData)
+    //   .then(({ status, data }) => {
+    //     if (status !== 200) {
+    //       throw new Error("Error! Puppy not updated");
+    //     }
+    //     setPuppies(data.puppies);
+    //   })
+    //   .catch((err) => console.log(err));
   };
 
   console.log("puppyList", puppyList);
-  console.log("puppies", puppies);
+  // console.log("puppies", puppies);
   return (
     <main className="App">
       <h1>My Puppies</h1>

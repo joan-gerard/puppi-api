@@ -7,6 +7,7 @@ export const getPuppies = async (): Promise<AxiosResponse<ApiDataType>> => {
     const puppies: AxiosResponse<ApiDataType> = await axios.get(
       baseUrl + "/puppies"
     );
+    console.log('puppies from api call', puppies)
     return puppies;
   } catch (error: any) {
     throw new Error(error);
